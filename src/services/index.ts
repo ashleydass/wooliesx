@@ -1,3 +1,4 @@
-import userRoutes from './user/routes';
+import usersRoutes from './users/routes';
+import productsSortRoutes from './products/settings/sort/routes';
 
-export default [...userRoutes];
+export default [...usersRoutes, ...productsSortRoutes];

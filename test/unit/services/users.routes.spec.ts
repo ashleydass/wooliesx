@@ -1,4 +1,4 @@
-import routes from "../../../src/services/user/routes";
+import routes from "../../../src/services/users/routes";
 import { Route, Handler } from "../../../src/services/type";
 import checkUserEnvSettings from "../../../src/middleware/checkUserEnvSettings";
 import { Response } from "express";
