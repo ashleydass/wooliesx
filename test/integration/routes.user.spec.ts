@@ -4,7 +4,7 @@ import { applyMiddleware, applyRoutes } from "../../src/utils";
 import middleware from "../../src/middleware";
 import routes from "../../src/services/user/routes";
 
-describe("routes", () => {
+describe("User routes", () => {
   let router: Router;
 
   beforeEach(() => {
