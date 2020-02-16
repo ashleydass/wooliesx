@@ -1,5 +1,5 @@
-import {
-  handleBodyRequestParsing,
-} from './common';
+// import { handleBodyRequestParsing } from './common';
+import handleLogging from './logger';
 
-export default [handleBodyRequestParsing];
+// export default [handleBodyRequestParsing, handleLogging];
+export default [handleLogging];
