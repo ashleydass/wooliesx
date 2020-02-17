@@ -1,26 +1,28 @@
-import { Router } from "express";
-import request from "supertest";
-import { initialiseRouter } from "./initialiser";
+import { Router } from 'express';
+import request from 'supertest';
+import { initialiseRouter } from './initialiser';
 
-describe("User routes", () => {
+describe('User routes', () => {
   let router: Router;
 
   beforeEach(() => {
     router = initialiseRouter();
   });
 
-  describe("GET /api/user", () => {
-    it("should return valid user details given env is setup correctly", async () => {
-      const name = "Test User";
-      const token = "Test Token";
+  describe('GET /api/user', () => {
+    it('should return valid user details given env is setup correctly', async () => {
+      const name = 'Test User';
+      const token = 'Test Token';
+      const resourceApiBaseUrl = 'Test Resource Base Url';
 
       process.env = {
         ...process.env,
         USER_NAME: name,
-        TOKEN: token
+        TOKEN: token,
+        RESOURCE_API_BASE_URL: resourceApiBaseUrl
       };
 
-      const response = await request(router).get("/api/user");
+      const response = await request(router).get('/api/user');
       expect(response.status).toEqual(200);
 
       expect(response.body).toMatchObject({
@@ -29,13 +31,13 @@ describe("User routes", () => {
       });
     });
 
-    it("should return 500 status if environment is not setup", async () => {
+    it('should return 500 status if environment is not setup', async () => {
       process.env = {
         ...process.env,
         USER_NAME: undefined,
         TOKEN: undefined
       };
-      const response = await request(router).get("/api/user");
+      const response = await request(router).get('/api/user');
       expect(response.status).toEqual(500);
 
       const {
@@ -44,7 +46,7 @@ describe("User routes", () => {
         }
       } = response;
 
-      expect(message).toBe("Invalid settings.");
+      expect(message).toBe('Invalid settings.');
     });
   });
 });

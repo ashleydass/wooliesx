@@ -1,7 +1,7 @@
-import checkUserEnvSettings from '../../../src/middleware/checkUserEnvSettings';
+import checkEnvSettings from '../../../src/middleware/checkEnvSettings';
 import { Response, NextFunction } from "express";
 
-describe('Middleware: checkUserEnvSettings', () => {
+describe('Middleware: checkEnvSettings', () => {
   beforeEach(() => {
     jest.resetAllMocks();
   });
@@ -11,7 +11,8 @@ describe('Middleware: checkUserEnvSettings', () => {
       process.env = {
         ...process.env,
         USER_NAME: undefined,
-        TOKEN: undefined
+        TOKEN: undefined,
+        RESOURCE_API_BASE_URL: undefined
       };
 
       const mockResponse: Partial<Response> = {
@@ -22,7 +23,7 @@ describe('Middleware: checkUserEnvSettings', () => {
 
       const mockNext: Partial<NextFunction> = jest.fn();
 
-      checkUserEnvSettings(undefined, mockResponse as Response, mockNext as NextFunction);
+      checkEnvSettings(undefined, mockResponse as Response, mockNext as NextFunction);
       expect(mockResponse.status).toHaveBeenCalledWith(500);
       expect(mockNext as NextFunction).not.toHaveBeenCalled();
     });
@@ -33,7 +34,8 @@ describe('Middleware: checkUserEnvSettings', () => {
       process.env = {
         ...process.env,
         USER_NAME: 'test name',
-        TOKEN: 'test token'
+        TOKEN: 'test token',
+        RESOURCE_API_BASE_URL: 'resource base url'
       };
 
       const mockResponse: Partial<Response> = {
@@ -42,10 +44,13 @@ describe('Middleware: checkUserEnvSettings', () => {
 
       const mockNext: Partial<NextFunction> = jest.fn();
 
-      checkUserEnvSettings(undefined, mockResponse as Response, mockNext as NextFunction);
+      checkEnvSettings(undefined, mockResponse as Response, mockNext as NextFunction);
       expect(mockResponse.locals).toHaveProperty('user', {
         name: 'test name',
         token : 'test token'
+      });
+      expect(mockResponse.locals).toHaveProperty('products', {
+        resourceApiBaseUrl: 'resource base url'
       });
       expect(mockNext).toHaveBeenCalled();
     });

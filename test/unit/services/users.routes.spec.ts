@@ -1,6 +1,6 @@
 import routes from "../../../src/services/users/routes";
 import { Route, Handler } from "../../../src/services/type";
-import checkUserEnvSettings from "../../../src/middleware/checkUserEnvSettings";
+import checkEnvSettings from "../../../src/middleware/checkEnvSettings";
 import { Response } from "express";
 
 jest.mock("express");
@@ -18,11 +18,11 @@ describe("User routes", () => {
     const [ realCheckUserEnvSettings, realResponseHandler ]
       = (routes as Route[])[0].handler as Handler[];
 
-    it("should use checkUserEnvSettings as first middleware", () => {
-      expect(realCheckUserEnvSettings).toBe(checkUserEnvSettings);
+    it("should use checkEnvSettings as first middleware", () => {
+      expect(realCheckUserEnvSettings).toBe(checkEnvSettings);
     });
 
-    it("should user checkUserEnvSettings as second middleware", () => {
+    it("should respond with user data", () => {
       const userEnvSetting = {
         name: "test name",
         token: "test token"

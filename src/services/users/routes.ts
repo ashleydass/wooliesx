@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import dotenv from 'dotenv';
 import { Route } from '../type';
-import checkUserEnvSettings from '../../middleware/checkUserEnvSettings';
+import checkEnvSettings from '../../middleware/checkEnvSettings';
 
 dotenv.config();
 
@@ -10,7 +10,7 @@ export default [
     path: '/api/user',
     method: 'get',
     handler: [
-      checkUserEnvSettings,
+      checkEnvSettings,
       async (_: Request, res: Response) => {
         const { user: { name, token }} = res.locals;
         res.json({
