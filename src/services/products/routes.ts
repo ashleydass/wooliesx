@@ -5,10 +5,15 @@ import { getProductsSorted } from './productsController';
 import checkEnvSettings from '../../middleware/checkEnvSettings';
 
 export type Product = {
-    name: string;
-    price: number;
-    quantity: number;
+  name: string;
+  price: number;
+  quantity: number;
 };
+
+export type ShopperHistory = {
+  customerId: number,
+  products: Product[]
+}
 
 export default [
   {
