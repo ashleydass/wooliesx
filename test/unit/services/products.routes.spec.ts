@@ -9,7 +9,7 @@ describe('Products routes', () => {
   it('should contain correct path and method', () => {
     const userRoute = (routes as Route[])[0];
     expect(userRoute).toMatchObject({
-      path: '/api/products',
+      path: '/api/products/sort',
       method: 'get'
     });
   });

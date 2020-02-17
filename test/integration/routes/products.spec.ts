@@ -19,9 +19,9 @@ describe("Products routes", () => {
     router = initialiseRouter();
   });
 
-  describe("GET /api/products", () => {
+  describe("GET /api/products/sort", () => {
     it("should return success response", async () => {
-      const response = await request(router).get("/api/products?sortOption=Low");
+      const response = await request(router).get("/api/products/sort?sortOption=Low");
       expect(response.status).toEqual(200);
     });
   });

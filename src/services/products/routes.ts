@@ -17,7 +17,7 @@ export type ShopperHistory = {
 
 export default [
   {
-    path: '/api/products',
+    path: '/api/products/sort',
     method: 'get',
     handler: [
       checkEnvSettings,
